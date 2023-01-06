@@ -1,0 +1,21 @@
+server:
+  port: 8088
+spring:
+  devtools:
+    restart:
+      enabled: true
+  datasource:
+    url: jdbc:mysql://120.46.215.180:3306/mysql?useUnicode=true&characterEncoding=utf-8&serverTimezone = GMT%2B8
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  mvc:
+    view:
+      prefix: /jsp/
+      suffix: .jsp
+  resources:
+    static-locations: /static/
+# mybatis扫描
+mybatis:
+  mapper-locations: classpath*:mapper/*.xml
+  type-aliases-package: cn.seu.domain

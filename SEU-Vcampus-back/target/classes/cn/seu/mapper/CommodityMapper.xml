@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.seu.mapper.CommodityMapper">
+
+    <resultMap id="BaseCommodity" type="Commodity">
+        <id column="commodity_id" property="commodityId"/>
+        <result column="type" property="type"/>
+        <result column="commodity_name" property="commodityName"/>
+        <result column="price" property="price" jdbcType="DOUBLE"/>
+        <result column="value" property="value" jdbcType="DOUBLE"/>
+        <result column="discount" property="discount" jdbcType="DOUBLE"/>
+        <result column="time" property="time" jdbcType="TIMESTAMP"/>
+        <result column="number" property="number"/>
+        <result column="hand" property="hand"/>
+        <result column="poster" property="poster"/>
+        <result column="image" property="image"/>
+    </resultMap>
+
+    <sql id="Base_column_list">
+        commodity_id,type,commodity_name,price,value,
+        discount,time,number,hand,poster,image
+    </sql>
+
+    <!--    List<Commodity> searchAll();-->
+    <select id="searchAll" resultMap="BaseCommodity">
+        select
+        <include refid="Base_column_list"/>
+        from tblcommodity
+    </select>
+
+    <!--    Commodity searchById(String commodityId);-->
+    <select id="searchById" resultMap="BaseCommodity">
+        select
+        <include refid="Base_column_list"/>
+        from tblcommodity where commodity_id=#{commodityId}
+    </select>
+</mapper>

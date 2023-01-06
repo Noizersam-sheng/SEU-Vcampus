@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.seu.mapper.OrderFormMapper">
+    <resultMap id="BaseForm" type="OrderForm">
+        <id column="id" property="id"/>
+        <result column="credit_card" property="creditCard"/>
+        <result column="out_trade_no" property="outTradeNo"/>
+        <result column="total_amount" property="totalAmount"/>
+        <result column="app_id" property="appId"/>
+        <result column="subject" property="subject"/>
+        <result column="trade_status" property="tradeStatus"/>
+        <result column="commodity_id" property="commodityId"/>
+        <result column="num" property="num"/>
+        <result column="gmt_create" property="gmtCreate"/>
+        <result column="gmt_payment" property="gmtPayment"/>
+        <result column="trade_no" property="tradeNo"/>
+        <result column="buyer_id" property="buyerId"/>
+    </resultMap>
+
+    <sql id="Base_column_list">
+        id,credit_card,out_trade_no,total_amount,app_id,subject,
+        trade_status,commodity_id,num,gmt_create,gmt_payment,trade_no,buyer_id
+    </sql>
+
+    <!--    List<OrderForm> searchAll();-->
+    <select id="searchAll" resultMap="BaseForm">
+        select
+        <include refid="Base_column_list"/>
+        from tblorder_form
+    </select>
+
+    <!--    OrderForm searchFormById(@Param("id") Long id);-->
+    <select id="searchFormById" resultMap="BaseForm">
+        select
+        <include refid="Base_column_list"/>
+        from tblorder_form where id=#{id}
+    </select>
+
+    <!--    OrderForm searchFormByOutTradeNo(@Param("outTradeNo") String outTradeNo);-->
+    <select id="searchFormByOutTradeNo" resultMap="BaseForm">
+        select
+        <include refid="Base_column_list"/>
+        from tblorder_form where out_trade_no=#{outTradeNo}
+    </select>
+
+    <!--    OrderForm searchFormByIdAndTradeNo(OrderFormBean orderFormBean);-->
+    <select id="searchFormByIdAndTradeNo" resultMap="BaseForm">
+        select
+        <include refid="Base_column_list"/>
+        from tblorder_form where id=#{id} and out_trade_no=#{outTradeNo}
+    </select>
+
+    <!--    int addOrderForm(OrderForm orderForm);-->
+    <insert id="addOrderForm">
+        insert into tblorder_form
+        (credit_card,out_trade_no,total_amount,app_id,subject,trade_status,commodity_id,num)
+        values (#{creditCard},#{outTradeNo},#{totalAmount},#{appId},#{subject},#{tradeStatus},#{commodityId},#{num})
+    </insert>
+
+    <!--    int updateOrderForm(OrderForm orderForm);-->
+    <update id="updateOrderForm">
+        update tblorder_form
+        set
+        trade_status=#{tradeStatus},
+        gmt_create=#{gmtCreate},
+        gmt_payment=#{gmtPayment},
+        trade_no=#{tradeNo},
+        buyer_id=#{buyerId}
+        where out_trade_no=#{outTradeNo}
+    </update>
+
+</mapper>

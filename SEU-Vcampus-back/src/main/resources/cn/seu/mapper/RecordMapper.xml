@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.seu.mapper.RecordMapper">
+    <resultMap id="BaseRecord" type="Record">
+        <id column="long_id" property="commodityId"/>
+        <result column="id" property="type"/>
+        <result column="ways" property="commodityName"/>
+        <result column="cost" property="price" jdbcType="DOUBLE"/>
+        <result column="surplus" property="value" jdbcType="DOUBLE"/>
+        <result column="time" property="time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--    int insert(Record record);-->
+    <insert id="insert">
+        insert into tblrecord
+        (id,ways,cost,surplus,time)
+        values
+        (#{id},#{ways},#{cost},#{surplus},#{time})
+    </insert>
+</mapper>
